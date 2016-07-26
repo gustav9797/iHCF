@@ -169,7 +169,7 @@ public class BardClass extends PvpClass implements Listener {
             BardEffect bardEffect = bardEffects.get(newStack.getType());
             if (bardEffect != null) {
                 msgCooldowns.put(uuid, millis + 1500L);
-                player.sendMessage(ChatColor.RED + " Bard Effect: " + ChatColor.GOLD + MARK);
+                player.sendMessage(ChatColor.GOLD + " Bard Effect: " + ChatColor.GOLD);
                 player.sendMessage(ChatColor.YELLOW + "  Clickable Effect: " + ChatColor.AQUA + Lang.fromPotionEffectType(bardEffect.clickable.getType()) + ' '
                         + (bardEffect.clickable.getAmplifier() + 1) + ChatColor.GRAY + " (" + (bardEffect.clickable.getDuration() / 20) + "s)");
                 player.sendMessage(ChatColor.YELLOW + "  Energy Cost: " + ChatColor.AQUA + bardEffect.energyCost);
@@ -225,8 +225,8 @@ public class BardClass extends PvpClass implements Listener {
                 bardData.setBuffCooldown(BUFF_COOLDOWN_MILLIS);
 
                 double newEnergy = this.setEnergy(player, bardData.getEnergy() - bardEffect.energyCost);
-                player.sendMessage(ChatColor.YELLOW + "You have just used " + name + " buff " + ChatColor.AQUA + Lang.fromPotionEffectType(bardEffect.clickable.getType()) + ' '
-                        + (bardEffect.clickable.getAmplifier() + 1) + ChatColor.YELLOW + " costing you " + ChatColor.BOLD + bardEffect.energyCost + ChatColor.YELLOW + " energy. "
+                player.sendMessage(ChatColor.GOLD + "You have just used " + name + " buff " + ChatColor.RED + Lang.fromPotionEffectType(bardEffect.clickable.getType()) + ' '
+                        + (bardEffect.clickable.getAmplifier() + 1) + ChatColor.GOLD + " costing you " + ChatColor.BOLD + bardEffect.energyCost + ChatColor.YELLOW + " energy. "
                         + "Your energy is now " + ChatColor.GREEN + ((newEnergy * 10.0) / 10.0)/* TODO:neeeded? */+ ChatColor.YELLOW + '.');
             }
         }
