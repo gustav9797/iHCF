@@ -61,7 +61,7 @@ public class MapKitCommand implements CommandExecutor, TabCompleter, Listener {
         }
 
         Player player = (Player) sender;
-        Inventory inventory = Bukkit.createInventory(player, InventoryUtils.getSafestInventorySize(items.size()), "Map " + ConfigurationService.MAP_NUMBER + " Kit");
+        Inventory inventory = Bukkit.createInventory(player, InventoryUtils.getSafestInventorySize(items.size()), "HCF Map " + ConfigurationService.MAP_NUMBER + " Kit");
         tracking.add(inventory);
         for (ItemStack item : items) {
             inventory.addItem(item);
