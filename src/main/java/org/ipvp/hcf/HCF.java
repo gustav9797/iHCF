@@ -316,7 +316,7 @@ public class HCF extends JavaPlugin {
         for (Map.Entry<String, Map<String, Object>> entry : map.entrySet()) {
             PluginCommand command = getCommand(entry.getKey());
             command.setPermission("hcf.command." + entry.getKey());
-            command.setPermissionMessage(ChatColor.RED + "You do not have permission for this command.");
+            command.setPermissionMessage(ChatColor.RED + "You may not execute this command.");
         }
     }
 
