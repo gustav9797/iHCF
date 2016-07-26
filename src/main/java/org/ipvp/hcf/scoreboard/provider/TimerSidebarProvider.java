@@ -71,7 +71,7 @@ public class TimerSidebarProvider implements SidebarProvider {
 
         SotwTimer.SotwRunnable sotwRunnable = plugin.getSotwTimer().getSotwRunnable();
         if (sotwRunnable != null) {
-            lines.add(new SidebarEntry(ChatColor.DARK_GREEN.toString() + ChatColor.BOLD, "SOTW", ChatColor.GRAY + ": " + ChatColor.GOLD +
+            lines.add(new SidebarEntry(ChatColor.DARK_GREEN.toString() + ChatColor.BOLD, "SOTW Protection", ChatColor.GRAY + ": " + ChatColor.WHITE +
                     DurationFormatter.getRemaining(sotwRunnable.getRemaining(), true)));
         }
 
@@ -81,7 +81,7 @@ public class TimerSidebarProvider implements SidebarProvider {
         EventFaction eventFaction = eventTimer.getEventFaction();
         if (eventFaction instanceof KothFaction) {
             lines.add(new SidebarEntry(eventTimer.getScoreboardPrefix(), eventFaction.getScoreboardName() + ChatColor.GRAY, ": " +
-                    ChatColor.GOLD + DurationFormatter.getRemaining(eventTimer.getRemaining(), true)));
+                    ChatColor.WHITE + DurationFormatter.getRemaining(eventTimer.getRemaining(), true)));
         } else if (eventFaction instanceof ConquestFaction) {
             ConquestFaction conquestFaction = (ConquestFaction) eventFaction;
             DecimalFormat format = CONQUEST_FORMATTER.get();
@@ -105,7 +105,7 @@ public class TimerSidebarProvider implements SidebarProvider {
             for (Map.Entry<PlayerFaction, Integer> entry : conquestTracker.getFactionPointsMap().entrySet()) {
                 String factionName = entry.getKey().getName();
                 if (factionName.length() > 14) factionName = factionName.substring(0, 14);
-                conquestLines.add(new SidebarEntry(ChatColor.LIGHT_PURPLE, ChatColor.BOLD + factionName, ChatColor.GRAY + ": " + ChatColor.YELLOW + entry.getValue()));
+                conquestLines.add(new SidebarEntry(ChatColor.RED, ChatColor.BOLD + factionName, ChatColor.GRAY + ": " + ChatColor.YELLOW + entry.getValue()));
                 if (++count == 3) break;
             }
         }
@@ -116,13 +116,13 @@ public class TimerSidebarProvider implements SidebarProvider {
             lines.add(new SidebarEntry(ChatColor.YELLOW, "Active Class" + ChatColor.GRAY + ": ", ChatColor.GREEN + pvpClass.getName()));
             if (pvpClass instanceof BardClass) {
                 BardClass bardClass = (BardClass) pvpClass;
-                lines.add(new SidebarEntry(ChatColor.DARK_PURPLE + " \u00bb ", ChatColor.LIGHT_PURPLE + "Energy", ChatColor.GRAY + ": " + ChatColor.GOLD +
+                lines.add(new SidebarEntry(ChatColor.DARK_GRAY + " \u00bb ", ChatColor.RED + "Energy", ChatColor.GRAY + ": " + ChatColor.WHITE +
                         handleBardFormat(bardClass.getEnergyMillis(player), true)));
 
                 long remaining = bardClass.getRemainingBuffDelay(player);
                 if (remaining > 0) {
-                    lines.add(new SidebarEntry(ChatColor.DARK_PURPLE + " \u00bb ", ChatColor.LIGHT_PURPLE + "Buff Delay",
-                            ChatColor.GRAY + ": " + ChatColor.GOLD + DurationFormatter.getRemaining(remaining, true)));
+                    lines.add(new SidebarEntry(ChatColor.DARK_GRAY + " \u00bb ", ChatColor.RED + "Buff Delay",
+                            ChatColor.GRAY + ": " + ChatColor.WHITE + DurationFormatter.getRemaining(remaining, true)));
                 }
             } else if (pvpClass instanceof ArcherClass) {
                 ArcherClass archerClass = (ArcherClass) pvpClass;
@@ -165,7 +165,7 @@ public class TimerSidebarProvider implements SidebarProvider {
 
                 String timerName = playerTimer.getName();
                 if (timerName.length() > 14) timerName = timerName.substring(0, timerName.length());
-                lines.add(new SidebarEntry(playerTimer.getScoreboardPrefix(), timerName + ChatColor.GRAY, ": " + ChatColor.GOLD + DurationFormatter.getRemaining(remaining, true)));
+                lines.add(new SidebarEntry(playerTimer.getScoreboardPrefix(), timerName + ChatColor.GRAY, ": " + ChatColor.WHITE + DurationFormatter.getRemaining(remaining, true)));
             }
         }
 
