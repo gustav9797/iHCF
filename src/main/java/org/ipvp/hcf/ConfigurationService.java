@@ -155,7 +155,7 @@ public class ConfigurationService {
     private static String DEFAULT_SERVER_TIME_ZONE = "GMT+1";
     public static TimeZone SERVER_TIME_ZONE = TimeZone.getTimeZone(DEFAULT_SERVER_TIME_ZONE);
     public static int WARZONE_RADIUS = 850;
-    public static String DONATE_URL = "donate.ipvp.org";
+    public static String DONATE_URL = "store.warfine.com";
 
     public static int SPAWN_BUFFER = 128;
     public static int MAP_NUMBER = 7;
@@ -212,7 +212,7 @@ public class ConfigurationService {
 
     // Faction tag colours.
     public static ChatColor TEAMMATE_COLOUR = ChatColor.GREEN;
-    public static ChatColor ALLY_COLOUR = ChatColor.GOLD;
+    public static ChatColor ALLY_COLOUR = ChatColor.LIGHT_PURPLE;
     public static ChatColor ENEMY_COLOUR = ChatColor.RED;
 
     public static ChatColor SAFEZONE_COLOUR = ChatColor.AQUA;
@@ -220,7 +220,7 @@ public class ConfigurationService {
     public static ChatColor WARZONE_COLOUR = ChatColor.LIGHT_PURPLE;
     public static ChatColor WILDERNESS_COLOUR = ChatColor.DARK_GREEN;
 
-    public static String SCOREBOARD_TITLE = ChatColor.GREEN.toString() + ChatColor.BOLD + "    iPvP " + ChatColor.RED + "[Map " + MAP_NUMBER + "]   ";
+    public static String SCOREBOARD_TITLE = ChatColor.GREEN.toString() + ChatColor.BOLD + "    Warfine " + ChatColor.RED + "[Map " + MAP_NUMBER + "]   ";
     public static int MAX_ALLIES_PER_FACTION = 0;
     public static int MAX_CLAIMS_PER_FACTION = 8;
     public static boolean ALLOW_CLAIMING_BESIDES_ROADS = true;
