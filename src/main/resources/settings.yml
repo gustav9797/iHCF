@@ -74,7 +74,7 @@ road_colour: "GOLD"
 warzone_colour: "LIGHT_PURPLE"
 wilderness_colour: "DARK_GREEN"
 
-scoreboard_title: "§a§l    iPvP §c[Map %MAP_NUMBER%]   "
+scoreboard_title: "&a&l    iPvP &c[Map %MAP_NUMBER%]   "
 max_allies_per_faction: 0
 max_claims_per_faction: 8
 allow_claiming_besides_roads: true

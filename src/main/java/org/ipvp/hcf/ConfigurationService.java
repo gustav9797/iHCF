@@ -121,6 +121,8 @@ public class ConfigurationService {
 
         SCOREBOARD_TITLE = config.getString("scoreboard_title", SCOREBOARD_TITLE);
         SCOREBOARD_TITLE = SCOREBOARD_TITLE.replaceAll("%MAP_NUMBER%", MAP_NUMBER + "");
+        SCOREBOARD_TITLE = ChatColor.translateAlternateColorCodes('&', SCOREBOARD_TITLE);
+
         MAX_ALLIES_PER_FACTION = config.getInt("max_allies_per_faction", MAX_ALLIES_PER_FACTION);
         MAX_CLAIMS_PER_FACTION = config.getInt("max_claims_per_faction", MAX_CLAIMS_PER_FACTION);
         ALLOW_CLAIMING_BESIDES_ROADS = config.getBoolean("allow_claiming_besides_roads", ALLOW_CLAIMING_BESIDES_ROADS);
