@@ -120,18 +120,18 @@ public class MinerClass extends PvpClass implements Listener {
         PlayerInventory playerInventory = player.getInventory();
 
         ItemStack helmet = playerInventory.getHelmet();
-        if (helmet == null || helmet.getType() != Material.IRON_HELMET || !helmet.getEnchantments().isEmpty())
+        if (helmet == null || helmet.getType() != Material.IRON_HELMET)
             return false;
 
         ItemStack chestplate = playerInventory.getChestplate();
-        if (chestplate == null || chestplate.getType() != Material.IRON_CHESTPLATE || !chestplate.getEnchantments().isEmpty())
+        if (chestplate == null || chestplate.getType() != Material.IRON_CHESTPLATE)
             return false;
 
         ItemStack leggings = playerInventory.getLeggings();
-        if (leggings == null || leggings.getType() != Material.IRON_LEGGINGS || !leggings.getEnchantments().isEmpty())
+        if (leggings == null || leggings.getType() != Material.IRON_LEGGINGS)
             return false;
 
         ItemStack boots = playerInventory.getBoots();
-        return !(boots == null || boots.getType() != Material.IRON_BOOTS || !boots.getEnchantments().isEmpty());
+        return !(boots == null || boots.getType() != Material.IRON_BOOTS);
     }
 }
