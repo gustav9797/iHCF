@@ -25,7 +25,7 @@ import java.util.concurrent.TimeUnit;
  */
 public class EotwHandler {
 
-    public static final int BORDER_DECREASE_MINIMUM = 1000;
+    public static final int BORDER_DECREASE_MINIMUM = 500;
     public static final int BORDER_DECREASE_AMOUNT = 200;
 
     public static final long BORDER_DECREASE_TIME_MILLIS = TimeUnit.SECONDS.toMillis(20L);
