@@ -97,19 +97,19 @@ public class ArcherClass extends PvpClass implements Listener {
         Entity damager = event.getDamager();
         if (!entity.equals(damager) && entity instanceof Player && damager instanceof Arrow) {
             Arrow arrow = (Arrow) damager;
-            float force = arrow.getKnockbackStrength();
+            /*float force = arrow.getKnockbackStrength();
             if (force == -1.0) {
                 return;
-            }
+            }*/
 
             ProjectileSource source = arrow.getShooter();
             if (source instanceof Player) {
                 Player shooter = (Player) source;
                 if (plugin.getPvpClassManager().hasClassEquipped(shooter, this)) {
-                    if (force <= MINIMUM_FORCE) {
+                    /*if (force <= MINIMUM_FORCE) {
                         shooter.sendMessage(ChatColor.RED + "Mark not applied as arrow was shot with less than " + MINIMUM_FORCE + "% force.");
                         return;
-                    }
+                    }*/
 
                     Player attacked = (Player) entity;
                     UUID attackedUUID = attacked.getUniqueId();
