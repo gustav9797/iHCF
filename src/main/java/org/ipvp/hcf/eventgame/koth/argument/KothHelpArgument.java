@@ -26,7 +26,8 @@ public class KothHelpArgument extends CommandArgument {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        sender.sendMessage(ChatColor.AQUA + "*** KotH Help ***");
+        sender.sendMessage(ChatColor.GREY + "§m--------------------");
+        sender.sendMessage(ChatColor.AQUA + "KoTH Help");
         for (CommandArgument argument : kothExecutor.getArguments()) {
             if (argument != this) {
                 String permission = argument.getPermission();
@@ -37,6 +38,7 @@ public class KothHelpArgument extends CommandArgument {
         }
 
         sender.sendMessage(ChatColor.GRAY + "/fac show <kothName> - View information about a KOTH.");
+                sender.sendMessage(ChatColor.GREY + "§m--------------------");
         return true;
     }
 }
