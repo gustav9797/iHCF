@@ -70,7 +70,7 @@ public class GappleTimer extends PlayerTimer implements Listener {
                 }
             })) {
 
-                player.sendMessage(ChatColor.GOLD + ChatColor.BOLD + "You have consumed a God Apple!");
+                player.sendMessage(ChatColor.GOLD + "" + ChatColor.BOLD + "You have consumed a God Apple!");
                 // goppleArtMessage.sendToPlayer(player);
             } else {
                 event.setCancelled(true);
