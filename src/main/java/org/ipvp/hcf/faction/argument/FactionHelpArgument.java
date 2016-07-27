@@ -70,7 +70,7 @@ public class FactionHelpArgument extends CommandArgument {
                     continue;
 
                 count++;
-                pages.get(val).add(ChatColor.BLUE + "/" + label + ' ' + argument.getName() + " > " + ChatColor.GRAY + argument.getDescription());
+                pages.get(val).add(ChatColor.RED + "/" + label + ' ' + argument.getName() + " - " + ChatColor.GRAY + argument.getDescription());
                 if (count % HELP_PER_PAGE == 0) {
                     val++;
                 }
@@ -92,14 +92,14 @@ public class FactionHelpArgument extends CommandArgument {
             return;
         }
 
-        sender.sendMessage(ChatColor.GOLD + BukkitUtils.STRAIGHT_LINE_DEFAULT);
-        sender.sendMessage(ChatColor.GOLD + " Faction Help " + ChatColor.WHITE + "(Page " + pageNumber + '/' + totalPageCount + ')');
+        sender.sendMessage(ChatColor.DARK_GRAY + BukkitUtils.STRAIGHT_LINE_DEFAULT);
+        sender.sendMessage(ChatColor.BLUE + " Faction Help " + ChatColor.WHITE + "(Page " + pageNumber + '/' + totalPageCount + ')');
         for (String message : pages.get(pageNumber)) {
             sender.sendMessage("  " + message);
         }
 
         sender.sendMessage(ChatColor.GOLD + " You are currently on " + ChatColor.WHITE + "Page " + pageNumber + '/' + totalPageCount + ChatColor.GOLD + '.');
         sender.sendMessage(ChatColor.GOLD + " To view other pages, use " + ChatColor.YELLOW + '/' + label + ' ' + getName() + " <page#>" + ChatColor.GOLD + '.');
-        sender.sendMessage(ChatColor.GOLD + BukkitUtils.STRAIGHT_LINE_DEFAULT);
+        sender.sendMessage(ChatColor.DARK_GRAY + BukkitUtils.STRAIGHT_LINE_DEFAULT);
     }
 }
