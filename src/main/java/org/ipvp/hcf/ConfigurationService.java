@@ -80,6 +80,18 @@ public class ConfigurationService {
             }
         }
 
+        ConfigurationSection bor = config.getConfigurationSection("border_sizes");
+        if (bor != null) {
+            BORDER_SIZES.clear();
+            for (String key : bor.getKeys(false)) {
+                World.Environment env = World.Environment.valueOf(key);
+                if (env != null)
+                    BORDER_SIZES.put(env, bor.getInt(key));
+                else
+                    plugin.getLogger().severe("Could not find world type with name " + key);
+            }
+        }
+
         ConfigurationSection spa = config.getConfigurationSection("spawn_radius_map");
         if (spa != null) {
             SPAWN_RADIUS_MAP.clear();
@@ -167,6 +179,7 @@ public class ConfigurationService {
     public static Map<Enchantment, Integer> ENCHANTMENT_LIMITS = new HashMap<>();
     public static Map<PotionType, Integer> POTION_LIMITS = new EnumMap<>(PotionType.class);
     public static Map<World.Environment, Integer> ROAD_LENGTHS = new EnumMap<>(World.Environment.class);
+    public static final Map<World.Environment, Integer> BORDER_SIZES = new EnumMap<>(World.Environment.class);
     public static Map<World.Environment, Integer> SPAWN_RADIUS_MAP = new EnumMap<>(World.Environment.class);
     public static boolean DIAMOND_ORE_ALERTS = false;
 
@@ -188,6 +201,10 @@ public class ConfigurationService {
 
         ROAD_LENGTHS.put(World.Environment.NORMAL, 4000);
         ROAD_LENGTHS.put(World.Environment.NETHER, 4000);
+
+        BORDER_SIZES.put(World.Environment.NORMAL, 2000);
+        BORDER_SIZES.put(World.Environment.NETHER, 1000);
+        BORDER_SIZES.put(World.Environment.THE_END, 1500);
 
         SPAWN_RADIUS_MAP.put(World.Environment.NORMAL, 50);
         SPAWN_RADIUS_MAP.put(World.Environment.NETHER, 25);

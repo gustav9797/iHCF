@@ -64,6 +64,7 @@ import org.ipvp.hcf.faction.type.RoadFaction;
 import org.ipvp.hcf.faction.type.SpawnFaction;
 import org.ipvp.hcf.listener.AutoSmeltOreListener;
 import org.ipvp.hcf.listener.BookDeenchantListener;
+import org.ipvp.hcf.listener.BorderListener;
 import org.ipvp.hcf.listener.BottledExpListener;
 import org.ipvp.hcf.listener.ChatListener;
 import org.ipvp.hcf.listener.CoreListener;
@@ -247,6 +248,7 @@ public class HCF extends JavaPlugin {
         manager.registerEvents(new BlockJumpGlitchFixListener(), this);
         manager.registerEvents(new BoatGlitchFixListener(), this);
         manager.registerEvents(new BookDeenchantListener(), this);
+        manager.registerEvents(new BorderListener(), this);
         manager.registerEvents(new BottledExpListener(), this);
         manager.registerEvents(new ChatListener(this), this);
         manager.registerEvents(new ClaimWandListener(this), this);

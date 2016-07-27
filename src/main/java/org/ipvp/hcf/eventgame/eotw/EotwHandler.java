@@ -3,14 +3,17 @@ package org.ipvp.hcf.eventgame.eotw;
 import org.apache.commons.lang3.time.DurationFormatUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
+import org.ipvp.hcf.ConfigurationService;
 import org.ipvp.hcf.DurationFormatter;
 import org.ipvp.hcf.HCF;
 import org.ipvp.hcf.faction.type.ClaimableFaction;
 import org.ipvp.hcf.faction.type.Faction;
+import org.ipvp.hcf.listener.BorderListener;
 
 import java.util.HashSet;
 import java.util.Iterator;
@@ -81,7 +84,7 @@ public class EotwHandler {
         }
 
         if (yes) {
-            // runnable = new EotwRunnable(ConfigurationService.BORDER_SIZES.get(World.Environment.NORMAL));
+            runnable = new EotwRunnable();
             runnable.runTaskTimer(plugin, 20L, 20L);
         } else {
             if (runnable != null) {
@@ -101,11 +104,7 @@ public class EotwHandler {
         private long startStamp;
         private int elapsedSeconds;
 
-        // The current World border size.
-        private int borderSize;
-
-        public EotwRunnable(int borderSize) {
-            this.borderSize = borderSize;
+        public EotwRunnable() {
             this.startStamp = System.currentTimeMillis() + EOTW_WARMUP_WAIT_MILLIS;
             this.elapsedSeconds = -EOTW_WARMUP_WAIT_SECONDS;
         }
@@ -114,7 +113,6 @@ public class EotwHandler {
             outsideBorder.remove(player);
         }
 
-        // TODO: Cleanup these millisecond managements
         public long getMillisUntilStarting() {
             long difference = System.currentTimeMillis() - startStamp;
             return difference > 0L ? -1L : Math.abs(difference);
@@ -158,31 +156,49 @@ public class EotwHandler {
                 Iterator<Player> iterator = outsideBorder.iterator();
                 while (iterator.hasNext()) {
                     Player player = iterator.next();
-                    // TODO
-                    /*
-                     * if (BorderListener.isWithinBorder(player.getLocation())) { iterator.remove(); continue; }
-                     */
+
+                    if (BorderListener.isWithinBorder(player.getLocation())) {
+                        iterator.remove();
+                        continue;
+                    }
 
                     player.sendMessage(ChatColor.RED + "You are currently outside of the border during EOTW, so you were withered.");
                     player.addPotionEffect(WITHER, true);
                 }
             }
 
-            int newBorderSize = borderSize - BORDER_DECREASE_AMOUNT;
-            if (elapsedSeconds % BORDER_DECREASE_TIME_SECONDS == 0) {
-                // ConfigurationService.BORDER_SIZES.put(World.Environment.NORMAL, borderSize = newBorderSize);
-                Bukkit.broadcastMessage(ChatColor.DARK_AQUA + "Border has been decreased to " + ChatColor.YELLOW + newBorderSize + ChatColor.DARK_AQUA + " blocks.");
-
-                // Update list of players outside of the border now it has shrunk.
-                for (Player player : Bukkit.getOnlinePlayers()) {
-                    // TODO:
-                    /*
-                     * if (!BorderListener.isWithinBorder(player.getLocation())) { outsideBorder.add(player); }
-                     */
+            for (World.Environment current : World.Environment.values()) {
+                int borderSize = ConfigurationService.BORDER_SIZES.get(current);
+                int newBorderSize = borderSize - BORDER_DECREASE_AMOUNT;
+                if (newBorderSize <= BORDER_DECREASE_MINIMUM) {
+                    ConfigurationService.BORDER_SIZES.put(current, BORDER_DECREASE_MINIMUM);
+                    continue;
                 }
-            } else if (elapsedSeconds % BORDER_DECREASE_TIME_SECONDS_HALVED == 0) {
-                Bukkit.broadcastMessage(ChatColor.DARK_AQUA + "Border decreasing to " + ChatColor.YELLOW + newBorderSize + ChatColor.DARK_AQUA + " blocks in " + ChatColor.YELLOW
-                        + BORDER_DECREASE_TIME_ALERT_WORDS + ChatColor.DARK_AQUA + '.');
+                if (elapsedSeconds % BORDER_DECREASE_TIME_SECONDS == 0) {
+                    ConfigurationService.BORDER_SIZES.put(current, borderSize = newBorderSize);
+                    String msg = (ChatColor.DARK_AQUA + "Border has been decreased to " + ChatColor.YELLOW + newBorderSize + ChatColor.DARK_AQUA + " blocks.");
+
+                    for (Player player : Bukkit.getOnlinePlayers()) {
+                        if (player.getWorld().getEnvironment().equals(current))
+                            player.sendMessage(msg);
+                    }
+
+                    // Update list of players outside of the border now it has shrunk.
+                    for (Player player : Bukkit.getOnlinePlayers()) {
+
+                        if (!BorderListener.isWithinBorder(player.getLocation())) {
+                            outsideBorder.add(player);
+                        }
+
+                    }
+                } else if (elapsedSeconds % BORDER_DECREASE_TIME_SECONDS_HALVED == 0) {
+                    String msg2 = (ChatColor.DARK_AQUA + "Border decreasing to " + ChatColor.YELLOW + newBorderSize + ChatColor.DARK_AQUA + " blocks in " + ChatColor.YELLOW
+                            + BORDER_DECREASE_TIME_ALERT_WORDS + ChatColor.DARK_AQUA + '.');
+                    for (Player player : Bukkit.getOnlinePlayers()) {
+                        if (player.getWorld().getEnvironment().equals(current))
+                            player.sendMessage(msg2);
+                    }
+                }
             }
         }
     }

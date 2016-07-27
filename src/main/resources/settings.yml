@@ -41,6 +41,11 @@ road_lengths:
     NORMAL: 4000
     NETHER: 4000
     
+border_sizes:
+    NORMAL: 2000
+    NETHER: 1000
+    THE_END: 1500
+    
 spawn_radius_map:
     NORMAL: 50
     NETHER: 25
