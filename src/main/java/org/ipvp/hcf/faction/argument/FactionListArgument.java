@@ -122,8 +122,8 @@ public class FactionListArgument extends CommandArgument {
             return;
         }
 
-        sender.sendMessage(ChatColor.GOLD + BukkitUtils.STRAIGHT_LINE_DEFAULT);
-        sender.sendMessage(ChatColor.GOLD + " Faction List " + ChatColor.WHITE + "(Page " + pageNumber + '/' + maxPages + ')');
+        sender.sendMessage(ChatColor.DARK_GRAY + BukkitUtils.STRAIGHT_LINE_DEFAULT);
+        sender.sendMessage(ChatColor.BLUE + " Faction List " + ChatColor.WHITE + "(Page " + pageNumber + '/' + maxPages + ')');
 
         Player player = sender instanceof Player ? (Player) sender : null;
         Collection<BaseComponent[]> components = pages.get(pageNumber);
@@ -139,6 +139,6 @@ public class FactionListArgument extends CommandArgument {
 
         sender.sendMessage(ChatColor.GOLD + " You are currently on " + ChatColor.WHITE + "Page " + pageNumber + '/' + maxPages + ChatColor.GOLD + '.');
         sender.sendMessage(ChatColor.GOLD + " To view other pages, use " + ChatColor.YELLOW + '/' + label + ' ' + getName() + " <page#>" + ChatColor.GOLD + '.');
-        sender.sendMessage(ChatColor.GOLD + BukkitUtils.STRAIGHT_LINE_DEFAULT);
+        sender.sendMessage(ChatColor.DARK_GRAY + BukkitUtils.STRAIGHT_LINE_DEFAULT);
     }
 }
