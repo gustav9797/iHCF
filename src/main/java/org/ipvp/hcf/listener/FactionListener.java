@@ -90,7 +90,7 @@ public class FactionListener implements Listener {
         if (faction instanceof PlayerFaction) {
             for (Player player : Bukkit.getOnlinePlayers()) {
                 Relation relation = faction.getRelation(player);
-                String msg = ChatColor.YELLOW + "Faction " + relation.toChatColour() + event.getOriginalName() + ChatColor.YELLOW + " has been " + ChatColor.AQUA + "renamed" + ChatColor.YELLOW
+                String msg = ChatColor.YELLOW + "The faction " + relation.toChatColour() + event.getOriginalName() + ChatColor.YELLOW + " has been " + ChatColor.AQUA + "renamed" + ChatColor.YELLOW
                         + " to " + relation.toChatColour() + event.getNewName() + ChatColor.YELLOW + '.';
                 player.sendMessage(msg);
             }
@@ -212,7 +212,7 @@ public class FactionListener implements Listener {
         PlayerFaction playerFaction = plugin.getFactionManager().getPlayerFaction(player);
         if (playerFaction != null) {
             playerFaction.printDetails(player);
-            playerFaction.broadcast(ChatColor.GOLD + "Member Online: " + ChatColor.GREEN + playerFaction.getMember(player).getRole().getAstrix() + player.getName() + ChatColor.GOLD + '.',
+            playerFaction.broadcast(ChatColor.DARK_GREEN + "Member Online: " + ChatColor.GREEN + playerFaction.getMember(player).getRole().getAstrix() + player.getName() + ChatColor.GOLD + '.',
                     player.getUniqueId());
         }
     }
@@ -222,7 +222,7 @@ public class FactionListener implements Listener {
         Player player = event.getPlayer();
         PlayerFaction playerFaction = plugin.getFactionManager().getPlayerFaction(player);
         if (playerFaction != null) {
-            playerFaction.broadcast(ChatColor.GOLD + "Member Offline: " + ChatColor.GREEN + playerFaction.getMember(player).getRole().getAstrix() + player.getName() + ChatColor.GOLD + '.');
+            playerFaction.broadcast(ChatColor.RED + "Member Offline: " + ChatColor.GREEN + playerFaction.getMember(player).getRole().getAstrix() + player.getName() + ChatColor.GOLD + '.');
         }
     }
 }
