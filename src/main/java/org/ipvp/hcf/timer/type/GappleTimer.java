@@ -55,7 +55,7 @@ public class GappleTimer extends PlayerTimer implements Listener {
 
     @Override
     public String getScoreboardPrefix() {
-        return ChatColor.YELLOW.toString() + ChatColor.BOLD;
+        return ChatColor.GOLD.toString() + ChatColor.BOLD;
     }
 
     @EventHandler(ignoreCancelled = true, priority = EventPriority.MONITOR)
