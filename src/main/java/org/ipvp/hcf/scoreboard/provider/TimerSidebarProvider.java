@@ -105,7 +105,7 @@ public class TimerSidebarProvider implements SidebarProvider {
             for (Map.Entry<PlayerFaction, Integer> entry : conquestTracker.getFactionPointsMap().entrySet()) {
                 String factionName = entry.getKey().getName();
                 if (factionName.length() > 14) factionName = factionName.substring(0, 14);
-                conquestLines.add(new SidebarEntry(ChatColor.RED, ChatColor.BOLD + factionName, ChatColor.GRAY + ": " + ChatColor.YELLOW + entry.getValue()));
+                conquestLines.add(new SidebarEntry(ChatColor.RED, ChatColor.BOLD + factionName, ChatColor.GRAY + ": " + ChatColor.WHITE + entry.getValue()));
                 if (++count == 3) break;
             }
         }
@@ -113,15 +113,15 @@ public class TimerSidebarProvider implements SidebarProvider {
         // Show the current PVP Class statistics of the player.
         PvpClass pvpClass = plugin.getPvpClassManager().getEquippedClass(player);
         if (pvpClass != null) {
-            lines.add(new SidebarEntry(ChatColor.YELLOW, "Active Class" + ChatColor.GRAY + ": ", ChatColor.GREEN + pvpClass.getName()));
+            lines.add(new SidebarEntry(ChatColor.YELLOW, "Current Class" + ChatColor.GRAY + ": ", ChatColor.GREEN + pvpClass.getName()));
             if (pvpClass instanceof BardClass) {
                 BardClass bardClass = (BardClass) pvpClass;
-                lines.add(new SidebarEntry(ChatColor.DARK_GRAY + " \u00bb ", ChatColor.RED + "Energy", ChatColor.GRAY + ": " + ChatColor.WHITE +
+                lines.add(new SidebarEntry(ChatColor.GOLD + " \u00bb ", ChatColor.AQUA + "Energy", ChatColor.GRAY + ": " + ChatColor.WHITE +
                         handleBardFormat(bardClass.getEnergyMillis(player), true)));
 
                 long remaining = bardClass.getRemainingBuffDelay(player);
                 if (remaining > 0) {
-                    lines.add(new SidebarEntry(ChatColor.DARK_GRAY + " \u00bb ", ChatColor.RED + "Buff Delay",
+                    lines.add(new SidebarEntry(ChatColor.GOLD + " \u00bb ", ChatColor.AQUA + "Buff Delay",
                             ChatColor.GRAY + ": " + ChatColor.WHITE + DurationFormatter.getRemaining(remaining, true)));
                 }
             } else if (pvpClass instanceof ArcherClass) {
@@ -138,18 +138,26 @@ public class TimerSidebarProvider implements SidebarProvider {
                             case 1:
                                 levelColour = ChatColor.GREEN;
                                 break;
-                            case 2 | 3:
+                            case 2:
                                 levelColour = ChatColor.RED;
                                 break;
+                            case 3:
+                                levelColour = ChatColor.DARK_RED;
+                                break;
+                                
                             default:
                                 levelColour = ChatColor.YELLOW;
                                 break;
                         }
 
                         // Add the current mark level to scoreboard.
+                        // Needs to be re-written. May be &6&lArcher Mark&7:
+                        // >>(/u00bb) Interlagos [Mark 1]
+                        // *NOTE THIS IS EXPERIMENTAL MAY CAUSE ERRORS THEREFORE NOT COMMITING TO MAIN!
                         String targetName = target.getName();
                         targetName = targetName.substring(0, Math.min(targetName.length(), 15));
-                        lines.add(new SidebarEntry(ChatColor.DARK_GRAY + " \u00bb" + ChatColor.RED, ' ' + targetName,
+                        lines.add(new SidebarEntry(ChatColor.GOLD.toString() + ChatColor.BOLD, "Archer Mark" + ChatColor.GRAY + ": ");
+                        lines.add(new SidebarEntry(ChatColor.GOLD + " \u00bb" + ChatColor.RED, ' ' + targetName,
                                 ChatColor.YELLOW.toString() + levelColour + " [Mark " + archerMark.currentLevel + ']'));
                     }
                 }
