@@ -71,7 +71,7 @@ public class TimerSidebarProvider implements SidebarProvider {
 
         SotwTimer.SotwRunnable sotwRunnable = plugin.getSotwTimer().getSotwRunnable();
         if (sotwRunnable != null) {
-            lines.add(new SidebarEntry(ChatColor.DARK_GREEN.toString() + ChatColor.BOLD, "SOTW Protection", ChatColor.GRAY + ": " + ChatColor.WHITE +
+            lines.add(new SidebarEntry(ChatColor.DARK_GREEN.toString() + ChatColor.BOLD, "SOTW", ChatColor.GRAY + ": " + ChatColor.WHITE +
                     DurationFormatter.getRemaining(sotwRunnable.getRemaining(), true)));
         }
 
@@ -149,7 +149,7 @@ public class TimerSidebarProvider implements SidebarProvider {
                         // Add the current mark level to scoreboard.
                         String targetName = target.getName();
                         targetName = targetName.substring(0, Math.min(targetName.length(), 15));
-                        lines.add(new SidebarEntry(ChatColor.LIGHT_PURPLE + " \u00bb" + ChatColor.RED, ' ' + targetName,
+                        lines.add(new SidebarEntry(ChatColor.DARK_GRAY + " \u00bb" + ChatColor.RED, ' ' + targetName,
                                 ChatColor.YELLOW.toString() + levelColour + " [Mark " + archerMark.currentLevel + ']'));
                     }
                 }
