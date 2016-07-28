@@ -115,7 +115,7 @@ public class InvincibilityTimer extends PlayerTimer implements Listener {
             location = BukkitUtils.getHighestLocation(location, location);
             for (Player player : players) {
                 if (getRemaining(player) > 0L && player.teleport(location, PlayerTeleportEvent.TeleportCause.PLUGIN)) {
-                    player.sendMessage(ChatColor.RED + "Land was claimed where you were standing. As you still have your " + getName() + " timer, you were teleported away.");
+                    player.sendMessage(ChatColor.RED + "Faction land was claimed where you were standing. As you still have your " + getName() + " timer, you were teleported away.");
                 }
             }
         }
@@ -126,7 +126,7 @@ public class InvincibilityTimer extends PlayerTimer implements Listener {
         Player player = event.getPlayer();
         if (this.setCooldown(player, player.getUniqueId(), defaultCooldown, true)) {
             this.setPaused(player.getUniqueId(), true);
-            player.sendMessage(ChatColor.GREEN + "You now have your " + getDisplayName() + ChatColor.GREEN + " timer.");
+            player.sendMessage(ChatColor.GREEN + "Your " + getDisplayName() + ChatColor.GREEN + " timer has been activated.");
         }
     }
 
@@ -157,8 +157,7 @@ public class InvincibilityTimer extends PlayerTimer implements Listener {
         long remaining = getRemaining(player);
         if (remaining > 0L) {
             event.setCancelled(true);
-            player.sendMessage(ChatColor.RED + "You cannot empty buckets as your " + getDisplayName() + ChatColor.RED + " timer is active [" + ChatColor.BOLD
-                    + DurationFormatter.getRemaining(remaining, true, false) + ChatColor.RED + " remaining]");
+            player.sendMessage(ChatColor.RED + "You cannot empty buckets as your " + getDisplayName() + ChatColor.RED + " timer is active.");
         }
     }
 
@@ -170,8 +169,7 @@ public class InvincibilityTimer extends PlayerTimer implements Listener {
         long remaining = getRemaining(player);
         if (remaining > 0L) {
             event.setCancelled(true);
-            player.sendMessage(ChatColor.RED + "You cannot ignite blocks as your " + getDisplayName() + ChatColor.RED + " timer is active [" + ChatColor.BOLD
-                    + DurationFormatter.getRemaining(remaining, true, false) + ChatColor.RED + " remaining]");
+            player.sendMessage(ChatColor.RED + "You cannot ignite items as your " + getDisplayName() + ChatColor.RED + " timer is active.");
         }
     }
 
@@ -264,7 +262,7 @@ public class InvincibilityTimer extends PlayerTimer implements Listener {
                 PlayerFaction playerFaction; // lazy-load
 
                 if (toFaction instanceof PlayerFaction && (playerFaction = plugin.getFactionManager().getPlayerFaction(player)) != null && playerFaction == toFaction) {
-                    player.sendMessage(ChatColor.AQUA + "You have entered your own claim, therefore your " + getDisplayName() + ChatColor.AQUA + " timer was cleared.");
+                    player.sendMessage(ChatColor.RED + "You have entered your own claim, therefore your " + getDisplayName() + ChatColor.RED + " timer was cleared.");
                     clearCooldown(player);
                     return;
                 }
