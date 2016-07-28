@@ -86,7 +86,7 @@ public class EnderPearlTimer extends PlayerTimer implements Listener {
         super.onExpire(userUUID);
         Player player = Bukkit.getPlayer(userUUID);
         if (player != null) {
-            player.sendMessage(ChatColor.GREEN + "Your " + getDisplayName() + ChatColor.GREEN + " timer has expired. You may now Enderpearl again.");
+            player.sendMessage(ChatColor.GREEN + "You may now " + getDisplayName() + " again.");
         }
     }
 
@@ -122,7 +122,7 @@ public class EnderPearlTimer extends PlayerTimer implements Listener {
                 Player shooter = (Player) source;
                 long remaining = getRemaining(shooter);
                 if (remaining > 0L) {
-                    shooter.sendMessage(ChatColor.RED + "You still have a " + getDisplayName() + ChatColor.RED + " cooldown for another " + ChatColor.BOLD
+                    shooter.sendMessage(ChatColor.RED + "You may " + getDisplayName() + ChatColor.RED + " in another " + ChatColor.BOLD
                             + DurationFormatter.getRemaining(remaining, true, false) + ChatColor.RED + '.');
 
                     event.setCancelled(true);
@@ -250,7 +250,7 @@ public class EnderPearlTimer extends PlayerTimer implements Listener {
                 net.minecraft.server.v1_7_R4.ItemStack item = ((CraftItemStack) stack).handle;
                 if (remaining > 0L) {
                     item = item.cloneItemStack();
-                    item.c(ChatColor.GOLD + "Enderpearl Cooldown: " + ChatColor.RED + DurationFormatter.getRemaining(remaining, true, true));
+                    item.c(ChatColor.LIGHT_PURPLE + "Enderpearl Cooldown: " + ChatColor.RED + DurationFormatter.getRemaining(remaining, true, true));
                     setFakeItem(item, player.getInventory().getHeldItemSlot());
                 } else {
                     cancel();
