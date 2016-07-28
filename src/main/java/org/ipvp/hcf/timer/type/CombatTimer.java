@@ -69,8 +69,7 @@ public class CombatTimer extends PlayerTimer implements Listener {
             long remaining = getRemaining(player);
             if (remaining > 0L) {
                 event.setCancelled(true);
-                player.sendMessage(ChatColor.RED + "You cannot join factions whilst your " + getDisplayName() + ChatColor.RED + " timer is active [" + ChatColor.BOLD
-                        + DurationFormatter.getRemaining(getRemaining(player), true, false) + ChatColor.RED + " remaining]");
+                player.sendMessage(ChatColor.RED + "You cannot join factions whilst your " + getDisplayName() + ChatColor.RED + " timer is active.");
             }
         }
     }
@@ -111,8 +110,7 @@ public class CombatTimer extends PlayerTimer implements Listener {
         if (!event.getFromFaction().isSafezone() && event.getToFaction().isSafezone() && getRemaining(player) > 0L) {
             event.setCancelled(true);
             player.sendMessage(ChatColor.RED + "You cannot enter " + event.getToFaction().getDisplayName(player) + ChatColor.RED + " whilst your " + getDisplayName() + ChatColor.RED
-                    + " timer is active [" + ChatColor.BOLD + DurationFormatter.getRemaining(getRemaining(player), true, false) + ChatColor.RED + " remaining]");
-        }
+                    + " timer is active.");
     }
 
     private static final long NON_WEAPON_TAG = 5000L;
@@ -134,8 +132,8 @@ public class CombatTimer extends PlayerTimer implements Listener {
             Optional<Player> optional = event.getPlayer();
             if (optional.isPresent()) {
                 Player player = optional.get();
-                player.sendMessage(ChatColor.AQUA + "You are now " + getDisplayName() + ChatColor.AQUA + " tagged for " + ChatColor.YELLOW
-                        + DurationFormatUtils.formatDurationWords(event.getDuration(), true, true) + ChatColor.AQUA + '.');
+                player.sendMessage(ChatColor.RED + "You are now " + getDisplayName() + ChatColor.RED + " tagged for " + ChatColor.YELLOW
+                        + DurationFormatUtils.formatDurationWords(event.getDuration(), true, true) + ChatColor.RED + '.');
             }
         }
     }
