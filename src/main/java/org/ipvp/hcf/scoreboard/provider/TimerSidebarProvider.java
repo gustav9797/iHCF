@@ -71,8 +71,8 @@ public class TimerSidebarProvider implements SidebarProvider {
 
         SotwTimer.SotwRunnable sotwRunnable = plugin.getSotwTimer().getSotwRunnable();
         if (sotwRunnable != null) {
-            lines.add(new SidebarEntry(ChatColor.DARK_GREEN.toString() + ChatColor.BOLD, "SOTW", ChatColor.GRAY + ": " + ChatColor.WHITE +
-                    DurationFormatter.getRemaining(sotwRunnable.getRemaining(), true)));
+            lines.add(new SidebarEntry(ChatColor.DARK_GREEN.toString() + ChatColor.BOLD, "SOTW",
+                    ChatColor.GRAY + ": " + ChatColor.WHITE + DurationFormatter.getRemaining(sotwRunnable.getRemaining(), true)));
         }
 
         EventTimer eventTimer = plugin.getTimerManager().getEventTimer();
@@ -80,8 +80,8 @@ public class TimerSidebarProvider implements SidebarProvider {
 
         EventFaction eventFaction = eventTimer.getEventFaction();
         if (eventFaction instanceof KothFaction) {
-            lines.add(new SidebarEntry(eventTimer.getScoreboardPrefix(), eventFaction.getScoreboardName() + ChatColor.GRAY, ": " +
-                    ChatColor.WHITE + DurationFormatter.getRemaining(eventTimer.getRemaining(), true)));
+            lines.add(new SidebarEntry(eventTimer.getScoreboardPrefix(), eventFaction.getScoreboardName() + ChatColor.GRAY,
+                    ": " + ChatColor.WHITE + DurationFormatter.getRemaining(eventTimer.getRemaining(), true)));
         } else if (eventFaction instanceof ConquestFaction) {
             ConquestFaction conquestFaction = (ConquestFaction) eventFaction;
             DecimalFormat format = CONQUEST_FORMATTER.get();
@@ -89,14 +89,10 @@ public class TimerSidebarProvider implements SidebarProvider {
             conquestLines = new ArrayList<>();
             conquestLines.add(new SidebarEntry(ChatColor.BLUE.toString(), ChatColor.BOLD + conquestFaction.getName() + ChatColor.GRAY, ":"));
 
-            conquestLines.add(new SidebarEntry("  " +
-                    ChatColor.RED.toString() + conquestFaction.getRed().getScoreboardRemaining(),
-                    ChatColor.RESET + " ",
+            conquestLines.add(new SidebarEntry("  " + ChatColor.RED.toString() + conquestFaction.getRed().getScoreboardRemaining(), ChatColor.RESET + " ",
                     ChatColor.YELLOW.toString() + conquestFaction.getYellow().getScoreboardRemaining()));
 
-            conquestLines.add(new SidebarEntry("  " +
-                    ChatColor.GREEN.toString() + conquestFaction.getGreen().getScoreboardRemaining(),
-                    ChatColor.RESET + " " + ChatColor.RESET,
+            conquestLines.add(new SidebarEntry("  " + ChatColor.GREEN.toString() + conquestFaction.getGreen().getScoreboardRemaining(), ChatColor.RESET + " " + ChatColor.RESET,
                     ChatColor.AQUA.toString() + conquestFaction.getBlue().getScoreboardRemaining()));
 
             // Show the top 3 factions next.
@@ -104,9 +100,11 @@ public class TimerSidebarProvider implements SidebarProvider {
             int count = 0;
             for (Map.Entry<PlayerFaction, Integer> entry : conquestTracker.getFactionPointsMap().entrySet()) {
                 String factionName = entry.getKey().getName();
-                if (factionName.length() > 14) factionName = factionName.substring(0, 14);
+                if (factionName.length() > 14)
+                    factionName = factionName.substring(0, 14);
                 conquestLines.add(new SidebarEntry(ChatColor.RED, ChatColor.BOLD + factionName, ChatColor.GRAY + ": " + ChatColor.WHITE + entry.getValue()));
-                if (++count == 3) break;
+                if (++count == 3)
+                    break;
             }
         }
 
@@ -116,13 +114,12 @@ public class TimerSidebarProvider implements SidebarProvider {
             lines.add(new SidebarEntry(ChatColor.YELLOW, "Current Class" + ChatColor.GRAY + ": ", ChatColor.GREEN + pvpClass.getName()));
             if (pvpClass instanceof BardClass) {
                 BardClass bardClass = (BardClass) pvpClass;
-                lines.add(new SidebarEntry(ChatColor.GOLD + " \u00bb ", ChatColor.AQUA + "Energy", ChatColor.GRAY + ": " + ChatColor.WHITE +
-                        handleBardFormat(bardClass.getEnergyMillis(player), true)));
+                lines.add(
+                        new SidebarEntry(ChatColor.GOLD + " \u00bb ", ChatColor.AQUA + "Energy", ChatColor.GRAY + ": " + ChatColor.WHITE + handleBardFormat(bardClass.getEnergyMillis(player), true)));
 
                 long remaining = bardClass.getRemainingBuffDelay(player);
                 if (remaining > 0) {
-                    lines.add(new SidebarEntry(ChatColor.GOLD + " \u00bb ", ChatColor.AQUA + "Buff Delay",
-                            ChatColor.GRAY + ": " + ChatColor.WHITE + DurationFormatter.getRemaining(remaining, true)));
+                    lines.add(new SidebarEntry(ChatColor.GOLD + " \u00bb ", ChatColor.AQUA + "Buff Delay", ChatColor.GRAY + ": " + ChatColor.WHITE + DurationFormatter.getRemaining(remaining, true)));
                 }
             } else if (pvpClass instanceof ArcherClass) {
                 ArcherClass archerClass = (ArcherClass) pvpClass;
@@ -135,19 +132,19 @@ public class TimerSidebarProvider implements SidebarProvider {
                     if (target != null) {
                         ChatColor levelColour;
                         switch (archerMark.currentLevel) {
-                            case 1:
-                                levelColour = ChatColor.GREEN;
-                                break;
-                            case 2:
-                                levelColour = ChatColor.RED;
-                                break;
-                            case 3:
-                                levelColour = ChatColor.DARK_RED;
-                                break;
-                                
-                            default:
-                                levelColour = ChatColor.YELLOW;
-                                break;
+                        case 1:
+                            levelColour = ChatColor.GREEN;
+                            break;
+                        case 2:
+                            levelColour = ChatColor.RED;
+                            break;
+                        case 3:
+                            levelColour = ChatColor.DARK_RED;
+                            break;
+
+                        default:
+                            levelColour = ChatColor.YELLOW;
+                            break;
                         }
 
                         // Add the current mark level to scoreboard.
@@ -156,9 +153,9 @@ public class TimerSidebarProvider implements SidebarProvider {
                         // *NOTE THIS IS EXPERIMENTAL MAY CAUSE ERRORS THEREFORE NOT COMMITING TO MAIN!
                         String targetName = target.getName();
                         targetName = targetName.substring(0, Math.min(targetName.length(), 15));
-                        lines.add(new SidebarEntry(ChatColor.GOLD.toString() + ChatColor.BOLD, "Archer Mark" + ChatColor.GRAY + ": ");
-                        lines.add(new SidebarEntry(ChatColor.GOLD + " \u00bb" + ChatColor.RED, ' ' + targetName,
-                                ChatColor.YELLOW.toString() + levelColour + " [Mark " + archerMark.currentLevel + ']'));
+                        lines.add(new SidebarEntry(ChatColor.GOLD + "" + ChatColor.BOLD, "Archer Mark" + ChatColor.GRAY + ": ", ""));
+                        lines.add(
+                                new SidebarEntry(ChatColor.GOLD + " \u00bb" + ChatColor.RED, ' ' + targetName, ChatColor.YELLOW.toString() + levelColour + " [Mark " + archerMark.currentLevel + ']'));
                     }
                 }
             }
@@ -169,10 +166,12 @@ public class TimerSidebarProvider implements SidebarProvider {
             if (timer instanceof PlayerTimer) {
                 PlayerTimer playerTimer = (PlayerTimer) timer;
                 long remaining = playerTimer.getRemaining(player);
-                if (remaining <= 0) continue;
+                if (remaining <= 0)
+                    continue;
 
                 String timerName = playerTimer.getName();
-                if (timerName.length() > 14) timerName = timerName.substring(0, timerName.length());
+                if (timerName.length() > 14)
+                    timerName = timerName.substring(0, timerName.length());
                 lines.add(new SidebarEntry(playerTimer.getScoreboardPrefix(), timerName + ChatColor.GRAY, ": " + ChatColor.WHITE + DurationFormatter.getRemaining(remaining, true)));
             }
         }

@@ -48,11 +48,13 @@ public class PortalListener implements Listener {
             return;
         }
 
-        World toWorld = event.getTo().getWorld();
-        if (toWorld != null && toWorld.getEnvironment() == World.Environment.THE_END) {
-            event.useTravelAgent(false);
-            event.setTo(toWorld.getSpawnLocation());
-            return;
+        if (event.getTo() != null) {
+            World toWorld = event.getTo().getWorld();
+            if (toWorld != null && toWorld.getEnvironment() == World.Environment.THE_END) {
+                event.useTravelAgent(false);
+                event.setTo(toWorld.getSpawnLocation());
+                return;
+            }
         }
 
         World fromWorld = event.getFrom().getWorld();
@@ -98,9 +100,8 @@ public class PortalListener implements Listener {
             PlayerTimer timer = plugin.getTimerManager().getCombatTimer();
             long remaining;
             if ((remaining = timer.getRemaining(player)) > 0L) {
-                message(player,
-                        ChatColor.RED + "You cannot enter the End whilst your " + timer.getDisplayName() + ChatColor.RED + " timer is active [" + ChatColor.BOLD
-                                + DurationFormatter.getRemaining(remaining, true, false) + ChatColor.RED + " remaining]");
+                message(player, ChatColor.RED + "You cannot enter the End whilst your " + timer.getDisplayName() + ChatColor.RED + " timer is active [" + ChatColor.BOLD
+                        + DurationFormatter.getRemaining(remaining, true, false) + ChatColor.RED + " remaining]");
 
                 event.setCancelled(true);
                 return;
@@ -109,9 +110,8 @@ public class PortalListener implements Listener {
             // Prevent entering the end if the player is PVP Protected.
             timer = plugin.getTimerManager().getInvincibilityTimer();
             if ((remaining = timer.getRemaining(player)) > 0L) {
-                message(player,
-                        ChatColor.RED + "You cannot enter the End whilst your " + timer.getDisplayName() + ChatColor.RED + " timer is active [" + ChatColor.BOLD
-                                + DurationFormatter.getRemaining(remaining, true, false) + ChatColor.RED + " remaining]");
+                message(player, ChatColor.RED + "You cannot enter the End whilst your " + timer.getDisplayName() + ChatColor.RED + " timer is active [" + ChatColor.BOLD
+                        + DurationFormatter.getRemaining(remaining, true, false) + ChatColor.RED + " remaining]");
 
                 event.setCancelled(true);
                 return;

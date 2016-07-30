@@ -109,8 +109,9 @@ public class CombatTimer extends PlayerTimer implements Listener {
         Player player = event.getPlayer();
         if (!event.getFromFaction().isSafezone() && event.getToFaction().isSafezone() && getRemaining(player) > 0L) {
             event.setCancelled(true);
-            player.sendMessage(ChatColor.RED + "You cannot enter " + event.getToFaction().getDisplayName(player) + ChatColor.RED + " whilst your " + getDisplayName() + ChatColor.RED
-                    + " timer is active.");
+            player.sendMessage(
+                    ChatColor.RED + "You cannot enter " + event.getToFaction().getDisplayName(player) + ChatColor.RED + " whilst your " + getDisplayName() + ChatColor.RED + " timer is active.");
+        }
     }
 
     private static final long NON_WEAPON_TAG = 5000L;
