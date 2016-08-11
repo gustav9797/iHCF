@@ -132,7 +132,6 @@ public class EotwHandler {
 
             if (elapsedSeconds == 0) {
                 Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), lives cleardeathbans);
-                Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), yes);
                 for (Faction faction : HCF.getPlugin().getFactionManager().getFactions()) {
                     if (faction instanceof ClaimableFaction) {
                         ClaimableFaction claimableFaction = (ClaimableFaction) faction;
