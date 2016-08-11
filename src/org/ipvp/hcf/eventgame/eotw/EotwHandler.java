@@ -28,17 +28,17 @@ public class EotwHandler {
     public static final int BORDER_DECREASE_MINIMUM = 500;
     public static final int BORDER_DECREASE_AMOUNT = 200;
 
-    public static final long BORDER_DECREASE_TIME_MILLIS = TimeUnit.MINUTES.toMillis(5L);
+    public static final long BORDER_DECREASE_TIME_MILLIS = TimeUnit.MINUTES.toMillis(60L);
     public static final int BORDER_DECREASE_TIME_SECONDS = (int) TimeUnit.MILLISECONDS.toSeconds(BORDER_DECREASE_TIME_MILLIS);
     public static final int BORDER_DECREASE_TIME_SECONDS_HALVED = BORDER_DECREASE_TIME_SECONDS / 2;
     public static final String BORDER_DECREASE_TIME_WORDS = DurationFormatUtils.formatDurationWords(BORDER_DECREASE_TIME_MILLIS, true, true);
     public static final String BORDER_DECREASE_TIME_ALERT_WORDS = DurationFormatUtils.formatDurationWords(BORDER_DECREASE_TIME_MILLIS / 2, true, true);
 
-    public static final long EOTW_WARMUP_WAIT_MILLIS = TimeUnit.MINUTES.toMillis(30L);
+    public static final long EOTW_WARMUP_WAIT_MILLIS = TimeUnit.MINUTES.toMillis(10L);
     public static final int EOTW_WARMUP_WAIT_SECONDS = (int) (TimeUnit.MILLISECONDS.toSeconds(EOTW_WARMUP_WAIT_MILLIS));
 
     private static final long EOTW_CAPPABLE_WAIT_MILLIS = TimeUnit.MINUTES.toMillis(20L);
-    private static final int WITHER_INTERVAL_SECONDS = 10;
+    private static final int WITHER_INTERVAL_SECONDS = 5;
 
     private EotwRunnable runnable;
     private final HCF plugin;
@@ -138,8 +138,13 @@ public class EotwHandler {
                     }
                 }
 
-                Bukkit.broadcastMessage(ChatColor.RED.toString() + ChatColor.BOLD + "EOTW" + ChatColor.GRAY + " has began. Border will decrease by " + BORDER_DECREASE_AMOUNT
-                        + " blocks every " + BORDER_DECREASE_TIME_WORDS + " until at " + BORDER_DECREASE_MINIMUM + " blocks.");
+                 Bukkit.broadcastMessage(ChatColor.RED + "\u2588\u2588\u2588\u2588\u2588\u2588\u2588");
+            Bukkit.broadcastMessage(ChatColor.RED + "\u2588" + ChatColor.DARK_RED + "\u2588\u2588\u2588\u2588\u2588" + ChatColor.RED + "\u2588" + " " + ChatColor.DARK_RED.toString() + ChatColor.BOLD + "EOTW");
+            Bukkit.broadcastMessage(ChatColor.RED + "\u2588" + ChatColor.DARK_RED + "\u2588" + ChatColor.RED + "\u2588\u2588\u2588\u2588\u2588" + " " + ChatColor.RED.toString() + ChatColor.BOLD + "EOTW has commenced.");
+            Bukkit.broadcastMessage(ChatColor.RED + "\u2588" + ChatColor.DARK_RED + "\u2588\u2588\u2588\u2588" + ChatColor.RED + "\u2588\u2588" + " " + ChatColor.RED + "All SafeZones are now Deathban.");
+            Bukkit.broadcastMessage(ChatColor.RED + "\u2588" + ChatColor.DARK_RED + "\u2588" + ChatColor.RED + "\u2588\u2588\u2588\u2588\u2588" + " " + ChatColor.RED + "The world border will now start shrinking to 500.");
+            Bukkit.broadcastMessage(ChatColor.RED + "\u2588" + ChatColor.DARK_RED + "\u2588\u2588\u2588\u2588\u2588" + ChatColor.RED + "\u2588" + " " + ChatColor.RED + "All factions are now raidable.");
+            Bukkit.broadcastMessage(ChatColor.RED + "\u2588\u2588\u2588\u2588\u2588\u2588\u2588");
 
                 return;
             }
@@ -169,7 +174,7 @@ public class EotwHandler {
                 }
                 if (elapsedSeconds % BORDER_DECREASE_TIME_SECONDS == 0) {
                     ConfigurationService.BORDER_SIZES.put(current, borderSize = newBorderSize);
-                    String msg = (ChatColor.DARK_AQUA + "Border has been decreased to " + ChatColor.YELLOW + newBorderSize + ChatColor.DARK_AQUA + " blocks.");
+                    String msg = (ChatColor.RED + "Border has been decreased to " + ChatColor.DARK_RED + newBorderSize + ChatColor.RED + " blocks.");
 
                     for (Player player : Bukkit.getOnlinePlayers()) {
                         if (player.getWorld().getEnvironment().equals(current))
