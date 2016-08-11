@@ -175,11 +175,7 @@ public class HCF extends JavaPlugin {
         new BukkitRunnable() {
             @Override
             public void run() {
-            	for (Player player : Bukkit.getOnlinePlayers())
-            	{
-            	if (player.isOp())
-                    player.sendMessage(ChatColor.GREEN.toString() + ChatColor.BOLD + "Saving!" + "\n" + ChatColor.GREEN + "Saved all faction and player data to the database." + "\n" + ChatColor.GRAY + "Current TPS: " + ChatColor.GREEN + Bukkit.spigot().getTPS()[0] + ChatColor.GRAY);
-                }
+               // getServer().broadcast(ChatColor.GREEN.toString() + ChatColor.BOLD + "Saving!" + "\n" + ChatColor.GREEN + "Saved all faction and player data to the database." + "\n" + ChatColor.GRAY + "Current TPS: " + ChatColor.GREEN + Bukkit.spigot().getTPS()[0] + ChatColor.GRAY, hcf.seesaves);
                 saveData();
             }
         }.runTaskTimerAsynchronously(plugin, TimeUnit.MINUTES.toMillis(10L), TimeUnit.MINUTES.toMillis(10L));
