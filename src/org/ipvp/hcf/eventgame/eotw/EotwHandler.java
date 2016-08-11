@@ -131,21 +131,23 @@ public class EotwHandler {
             elapsedSeconds++;
 
             if (elapsedSeconds == 0) {
+                Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), lives cleardeathbans);
+                Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), yes);
                 for (Faction faction : HCF.getPlugin().getFactionManager().getFactions()) {
                     if (faction instanceof ClaimableFaction) {
                         ClaimableFaction claimableFaction = (ClaimableFaction) faction;
                         claimableFaction.removeClaims(claimableFaction.getClaims(), Bukkit.getConsoleSender());
                     }
                 }
-
-                 Bukkit.broadcastMessage(ChatColor.RED + "\u2588\u2588\u2588\u2588\u2588\u2588\u2588");
-            Bukkit.broadcastMessage(ChatColor.RED + "\u2588" + ChatColor.DARK_RED + "\u2588\u2588\u2588\u2588\u2588" + ChatColor.RED + "\u2588" + " " + ChatColor.DARK_RED.toString() + ChatColor.BOLD + "EOTW");
-            Bukkit.broadcastMessage(ChatColor.RED + "\u2588" + ChatColor.DARK_RED + "\u2588" + ChatColor.RED + "\u2588\u2588\u2588\u2588\u2588" + " " + ChatColor.RED.toString() + ChatColor.BOLD + "EOTW has commenced.");
-            Bukkit.broadcastMessage(ChatColor.RED + "\u2588" + ChatColor.DARK_RED + "\u2588\u2588\u2588\u2588" + ChatColor.RED + "\u2588\u2588" + " " + ChatColor.RED + "All SafeZones are now Deathban.");
+            Bukkit.broadcastMessage(ChatColor.RED + "");    
+            Bukkit.broadcastMessage(ChatColor.RED + "\u2588\u2588\u2588\u2588\u2588\u2588\u2588");
+            Bukkit.broadcastMessage(ChatColor.RED + "\u2588" + ChatColor.DARK_RED + "\u2588\u2588\u2588\u2588\u2588" + ChatColor.RED + "\u2588" + " " + ChatColor.DARK_RED.toString() + ChatColor.BOLD + "EOTW has commenced.");
+            Bukkit.broadcastMessage(ChatColor.RED + "\u2588" + ChatColor.DARK_RED + "\u2588" + ChatColor.RED + "\u2588\u2588\u2588\u2588\u2588" + " " + ChatColor.RED + "Deathbans have been cleared. All deathbans are now permanent.");
+            Bukkit.broadcastMessage(ChatColor.RED + "\u2588" + ChatColor.DARK_RED + "\u2588\u2588\u2588\u2588" + ChatColor.RED + "\u2588\u2588" + " " + ChatColor.RED + "All Safezones are now Deathban.");
             Bukkit.broadcastMessage(ChatColor.RED + "\u2588" + ChatColor.DARK_RED + "\u2588" + ChatColor.RED + "\u2588\u2588\u2588\u2588\u2588" + " " + ChatColor.RED + "The world border will now start shrinking to 500.");
             Bukkit.broadcastMessage(ChatColor.RED + "\u2588" + ChatColor.DARK_RED + "\u2588\u2588\u2588\u2588\u2588" + ChatColor.RED + "\u2588" + " " + ChatColor.RED + "All factions are now raidable.");
             Bukkit.broadcastMessage(ChatColor.RED + "\u2588\u2588\u2588\u2588\u2588\u2588\u2588");
-
+            Bukkit.broadcastMessage(ChatColor.RED + ""); 
                 return;
             }
 
