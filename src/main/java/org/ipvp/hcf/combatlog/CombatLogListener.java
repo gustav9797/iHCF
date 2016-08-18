@@ -169,6 +169,7 @@ public class CombatLogListener implements Listener {
             CraftEntity craftEntity = loggerEntity.getBukkitEntity();
             CraftLivingEntity craftLivingEntity = (CraftLivingEntity) craftEntity;
             EntityEquipment entityEquipment = craftLivingEntity.getEquipment();
+          //  entityEqupiment.setInventory(inventory.getInventory());
             entityEquipment.setItemInHand(inventory.getItemInHand());
             entityEquipment.setArmorContents(inventory.getArmorContents());
             craftLivingEntity.addPotionEffects(player.getActivePotionEffects());
